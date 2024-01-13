@@ -32,16 +32,17 @@ The DHCP, DNS, and routing servers were all used by the client PC to connect to 
 
 # VirtualBox Configuration
 
-<div style="display:flex;">
+<div align="center">
 
-<p>
-  <img src="assets/VM CONFIG.png" width="300" alt="VM Settings"/>
-</p>
-&nbsp;&nbsp;
-<p>
-  <img src="assets/VM ADAPTER1.png" width="300" alt="VM Network Adapter Settings"/>
-  <img src="assets/VM ADAPTER2.png" width="300" alt="VM Network Adapter Settings"/>
-</p>
+<table>
+  <tr>
+    <td><img src="assets/VM ADAPTER1.png" width="500" alt="VM Network Adapter Settings"/></td>
+    <td rowspan="3"><img src="assets/VM CONFIG.png"  width="300" alt="VM Settings"/></td>
+  </tr>
+  <tr>
+    <td><img src="assets/VM ADAPTER2.png" width="500" alt="VM Network Adapter Settings"/></td>
+  </tr>
+</table>
 
 </div>
 
@@ -50,64 +51,96 @@ To get started with this homelab, the first thing I needed to do was configure m
 For this, Adapter 1 was the main internet connection that would be connected through my host machine. Adapter 2 was going to be used as a gateway between my client and server VMs, so it is configured as an internal network to be able to communicate with the other VM.
 
 # Windows Server Setup
-<p>
-  <img src="assets/CONFIGURE NETWORK ADAPTERS.png" width="250" alt="VM Network Adapter Settings"/>
-  <img src="assets/IP ASSIGN.png" width="200" alt="VM Network Adapter Settings"/>
-  <img src="assets/NAME CHANGE.png"  alt="System name change"/>
-</p>
+
+<div align="center">
+
+<table>
+  <tr>
+    <td><img src="assets/CONFIGURE NETWORK ADAPTERS.png" syle="display:block;"  alt="VM Network Adapter Settings"/></td>
+    <td rowspan="3"><img src="assets/IP ASSIGN.png" width="300" syle="display:block;" alt="VM Network Adapter Settings"/></td>
+  </tr>
+  <tr>
+    <td><img src="assets/NAME CHANGE.png" width="600" syle="display:block;" alt="System name change"/></td>
+  </tr>
+</table>
+
+</div>
 
 The first thing I did when I booted into the system was assign a static IP to my internal network adapter. The adapter is automatically assigned an APIPA address since it cannot connect to a DHCP server. I also changed the name of the system to DC for simplicity.
 
 ## Active Directory Installation
 
-<p>
+<p align="center">
+  
+<img src="assets/AD INSTALL.png" width="400px" alt="Active Directory Install"/>
+&nbsp;&nbsp;&nbsp;
+<img src="assets/FOREST SETUP.png" width="400px" alt="AD Forest Setup"/>
 
-  <img src="assets/AD INSTALL.png" width="400px" alt="Active Directory Install"/>
-
-  <img src="assets/FOREST SETUP.png" width="400px" alt="AD Forest Setup"/>
 </p>
 
 Inside of the server dashboard, I used the *Add Roles and Features Wizard* to install the Active Directory Domain Services and added a new forest with the domain name of <b>homelabDC.com</b>.
 
+<p align="center">
+  
   <img src="assets/AD LOGIN.png" width="300" alt="Server Login with Domain "/>
-
+  
+</p>
 After restarting the machine, I was now connected to the domain.
 
 With Active Directory installed, the next thing I did was create a domain admin account that I could use to install and configure the rest of the servers.
 
 I first needed to create a new Organizational Unit (OU) to store the new user.
-<p>
 
-  <img src="assets/ADMINS OU.png" width="250" alt="Admin OU Creation"/>
-  <img src="assets/ADMIN USER CREATION.png" width="250" alt="Admin Account Creation"/>
-  <img src="assets/DOMAIN ADMIN.png" width="250" alt="Domain Admin"/>
+<div align="center">
 
-</p>
+<table>
+  <tr>
+    <td><img src="assets/ADMINS OU.png" width="300" alt="Admin OU Creation"/></td>
+    <td rowspan="3"><img src="assets/DOMAIN ADMIN.png" width="400" alt="Domain Admin"/></td>
+  </tr>
+  <tr>
+    <td><img src="assets/ADMIN USER CREATION.png" width="300" alt="Admin Account Creation"/></td>
+  </tr>
+</table>
+
+</div>
 
 I also created another OU and user that I could use for my client PC.
-<p>
-  <img src="assets/ACCOUNTS OU.png" width="300" alt="Client OU Creation"/>
-  <img src="assets/USER ACCOUNT.png" width="300" alt="Client OU Creation"/>
+
+<p align="center">
+  
+<img src="assets/ACCOUNTS OU.png" width="300" alt="Client OU Creation"/>
+&nbsp;&nbsp;&nbsp;
+<img src="assets/USER ACCOUNT.png" width="300" alt="Client OU Creation"/>
+
 </p>
+
 From the Server Dashboard:
 
 > Tools > Active Directory Users and Computers > right-click homelabDC.com > New > Organizational Unit
 
-
+<p align="center">
+  
 <img src="assets/LOGIN.png" width="400" alt="Domain Admin Account Sign in"/>
+  
+</p>
 
 I created a new user inside of the OU and gave the account admin access to the domain. After the account was created, I signed out of the Administrator account and signed into the Domain Admin account.
 
 ## Server Installations
 
+<p align="center">
+  
 <img src="assets/SERVERS.png" width="400" alt="List of Running Servers"/>
+  
+</p>
 
 On the Domain Admin account, I used the *Add Roles and Features Wizard* to download and install the <b>DHCP</b>, <b>DNS</b>, and <b>Routing and Remote Access</b> servers.
 
-<p>
+<p align="center">
 
   <img src="assets/NAT INSTALL.png" width="300" alt="Routing and Remote Access NAT"/>
-
+  &nbsp;&nbsp;&nbsp;
   <img src="assets/NAT ADAPTERS.png" width="300" alt="Routing and Remote Access NAT"/>
 
 </p>
@@ -118,13 +151,13 @@ From the Server Dashboard:
 
 > Tools > Routing and Remote Access > right-click DC(local) > Configure and Enable Routing and Remote Access
 
-<p>
+<p align="center">
 
-  <img src="assets/DHCP RANGE.png" width="250" alt="Routing and Remote Access NAT"/>
-
-  <img src="assets/DHCP ROUTER.png" width="250" alt="Routing and Remote Access NAT"/>
-
-  <img src="assets/DHCP DNS.png" width="250" alt="Routing and Remote Access NAT"/>
+  <img src="assets/DHCP RANGE.png" width="300" alt="Routing and Remote Access NAT"/>
+  &nbsp;&nbsp;
+  <img src="assets/DHCP ROUTER.png" width="300" alt="Routing and Remote Access NAT"/>
+  &nbsp;&nbsp;
+  <img src="assets/DHCP DNS.png" width="300" alt="Routing and Remote Access NAT"/>
 
 </p>
 
@@ -136,31 +169,57 @@ From the Server Dashboard:
 
 # Client PC Setup
 
+<p align="center">
+  
 <img src="assets/WINDOWS PC ADAPTER SETTINGS.png" width="300" alt="Windows 10 Pro VM Settings"/>
+  
+</p>
+
 
 After configuring the DHCP server, all that was left for me to do was connect to the domain using the client PC. To do this, I created a second VM with the same settings as the server VM. The only settings that were changed were the network settings.
 
 Instead of using two adapters, this VM only needed one that was connected to the internal network.
 
-<img src="assets/CLIENT PC IPCONFIG.png" width="300" alt="Windows 10 Pro VM Settings"/>
+<p align="center">
 
-<img src="assets/CLIENT PC PING.png" width="300" alt="Windows 10 Pro VM Settings"/>
+<img src="assets/CLIENT PC IPCONFIG.png" width="400" alt="Windows 10 Pro VM Settings"/>
+  &nbsp;&nbsp;
+<img src="assets/CLIENT PC PING.png" width="400" alt="Windows 10 Pro VM Settings"/>
+
+</p>
+
+
 
 The first thing I did on the client PC was open the command prompt and check if the device was getting an IP address from the DHCP server. I also tested pings to verify that I was able to connect to the network.
 
+<p align="center">
+  
 <img src="assets/CLIENT PC ADD DOMAIN.png" width="300" alt="Client PC Domain Add"/>
+&nbsp;&nbsp;
 <img src="assets/CLIENT PC DOMAIN CONFIGURATION.png" width="300" alt="Client PC Domain Add"/>
+&nbsp;&nbsp;
 <img src="assets/CLIENT PC DOMAIN SIGN IN.png" width="300" alt="Client PC Domain Add"/>
+
+</p>
 
 Once I was able to connect to the network, the last step was to connect the system to the domain. This can be done in the system settings under:
 > Settings > About > Advanced System Settings > Computer Name > Change
 
+<p align="center">
+  
 <img src="assets/CLIENT PC ADDED.png" width="300" alt="Client PC Domain Add"/>
+  
+</p>
 
 After restarting the system, I was able to sign in with the account username and password that I created earlier. After that, I was done configuring the client PC, and it was successfully connected to the domain.
 
+<p align="center">
+  
 <img src="assets/CLIENT PC HOMELAB LOGIN.png" width="300" alt="Client PC Domain Add"/>
+&nbsp;&nbsp;&nbsp;
 <img src="assets/CLIENT PC DEVICE NAME.png" width="300" alt="Client PC Domain Add"/>
+
+</p>
 
 ## Challenges
 This was a really fun and interactive homelab that let me test my abilities and become more comfortable navigating a Windows Server. One of the biggest challenges that I repeatedly faced was trying to get the client PC connected to the internet. I was configuring everything, but I was still unable to ping any network outside of the internal network.
